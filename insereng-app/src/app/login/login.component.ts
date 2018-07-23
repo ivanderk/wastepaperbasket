@@ -38,5 +38,8 @@ export class LoginComponent {
           });
         },
       );
+    /*this.authService.setToken(`000000`);
+    this.authService.setLogged(true);
+    this.router.navigate(['/home']);*/
   }
 }
