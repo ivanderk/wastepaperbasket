@@ -1,4 +1,4 @@
-import { User } from './api/user.interface';
+import { User } from '../api/user.interface';
 
 export class UserDto implements User {
   constructor(
