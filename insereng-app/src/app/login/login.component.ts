@@ -23,11 +23,16 @@ export class LoginComponent {
       .login(login.value.username, login.value.password)
       .subscribe(
         (res: any) => {
-          this.loginService.getCsrf().subscribe((data: any) => {
+          console.log('Authenticated:', res);
+          this.authService.setToken(res.token);
+          this.authService.setLogged(true);
+          this.router.navigate(['/home']);
+
+          /*this.loginService.getCsrf().subscribe((data: any) => {
             this.authService.setToken(data.token);
             this.authService.setLogged(true);
             this.router.navigate(['/home']);
-          });
+          });*/
         },
         (err: any) => {
           this.authService.setLogged(false);

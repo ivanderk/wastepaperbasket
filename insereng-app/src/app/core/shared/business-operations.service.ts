@@ -7,7 +7,7 @@ export class BusinessOperationsService {
   public restPath: string = environment.restPathRoot;
 
   login(): string {
-    return this.serverPath + 'login';
+    return this.serverPath + 'security/login';
   }
   logout(): string {
     return this.serverPath + 'logout';
