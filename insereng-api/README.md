@@ -45,7 +45,11 @@ For Mongo install and config options see: https://hub.docker.com/_/mongo/
 docker pull mongo
 
 # run mongo server process mapped to local dir
-$ docker run --name mongo-db -v c:/src/insereng/data:/data/db -d mongo
+# Note: on Windows or OSX it is NOT possible to map to a local dir
+$ docker run --name mongo-db -v /my/own/datadir:/data/db -d mongo
+
+# Without mapped directory
+
 
 # run mongo client connected to server process
 $ docker run -it --link mongo-db:mongo --rm mongo mongo --host mongo test
