@@ -7,6 +7,8 @@ import { ProductDto } from './dto/ProductDto';
 export class CatalogService {
   
   public async getCatalog(): Promise<Array<ServiceDto>> {
-    return Promise.resolve([new ServiceDto('Production Line', [new ProductDto('Training')])]);
+  
+    //return Promise.resolve([new ServiceDto('Production Line', [new ProductDto('Training')])]);
+    return [new ServiceDto('Production Line', [new ProductDto('Training')])];
   }
 }
