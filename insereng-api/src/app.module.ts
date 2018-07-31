@@ -4,6 +4,7 @@ import { AppService } from 'app.service';
 import { SecurityModule } from 'security/security.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatalogModule } from './catalog/catalog.module';
+import { CatalogController } from './catalog/catalog.controller';
 import { Connection } from 'typeorm';
 
 @Module({

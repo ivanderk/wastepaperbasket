@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { ServiceDto } from './dto/ServiceDto';
+import { ProductDto } from './dto/ProductDto';
 
 
 @Injectable()
 export class CatalogService {
   
-  /*public findUser(id: string): Promise<User> {
-    return Promise.resolve(
-      new UserDto(id, 'Paquito', 'Pepino', new Date('20-08-1980')),
-    );
-  }*/
+  public async getCatalog(): Promise<Array<ServiceDto>> {
+    return Promise.resolve([new ServiceDto('Production Line', [new ProductDto('Training')])]);
+  }
 }

@@ -1,14 +1,17 @@
-import { Controller, Body, Post } from '@nestjs/common';
+import { Controller, Body, Post, Get } from '@nestjs/common';
 import { CatalogService } from './catalog.service';
 
 @Controller('catalog')
 export class CatalogController {
   constructor(public readonly catalogService: CatalogService) {}
 
-  /*
-  @Post()
-  async login(@Body() userCredentials: UserCredentialsDto): Promise<LoginDto> {
-    const user = await this.authService.findUser(userCredentials.j_username);
-    return Promise.resolve(new LoginDto(user, 'JWTTOKEN-XXXXXXX'));
-  }*/
+  @Get()
+  public Get(): string {
+
+  //public async Get(): Promise<Array<ServiceDto>> {
+   // const catalog = await this.catalogService.getCatalog();
+    //return catalog;
+    return 'Booh';
+
+  }
 }
