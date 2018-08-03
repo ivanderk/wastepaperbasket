@@ -1,14 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import { ServiceDto } from './dto/ServiceDto';
-import { ProductDto } from './dto/ProductDto';
+import { ServiceDto } from './dto/service.dto';
+import { ProductDto } from './dto/product.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ServiceEntity } from './entity/service.entity';
+import { Repository } from 'typeorm';
+import { getMongoManager } from "typeorm";
 
 
 @Injectable()
 export class CatalogService {
-  
-  public async getCatalog(): Promise<Array<ServiceDto>> {
-  
-    //return Promise.resolve([new ServiceDto('Production Line', [new ProductDto('Training')])]);
-    return [new ServiceDto('Production Line', [new ProductDto('Training')])];
+  constructor(
+    //@InjectRepository(ServiceEntity)
+    //private readonly repository: Repository<ServiceEntity>
+  ) {}
+
+  public async getCatalog(): Promise<Array<ServiceEntity>> {
+
+    const manager = getMongoManager();
+    return await manager.find(ServiceEntity);
+
   }
 }

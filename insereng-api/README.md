@@ -48,7 +48,7 @@ docker pull mongo
 # Note: on Windows or OSX it is NOT possible to map to a local dir (with MongDb; not in general)
 $ docker run --name mongo-db -v /my/own/datadir:/data/db -d mongo
 
-$ docker run --name mongo-db -d mongo
+$ docker run --name mongo-db  -p 127.0.0.1:27017:27017  -d mongo
 
 
 # Without mapped directory
