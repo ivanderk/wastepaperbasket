@@ -1,5 +1,5 @@
 
-import { Entity, ObjectID, ObjectIdColumn, Column } from "typeorm";
+import { Entity, ObjectID, ObjectIdColumn, Column } from 'typeorm';
 
 import { Service } from '../api/service.api';
 

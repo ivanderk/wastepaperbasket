@@ -1,4 +1,4 @@
-import { Product } from '../api/service.api';
+import { Product } from '../api/product.api';
 
 export class ProductDto implements Product {
 
