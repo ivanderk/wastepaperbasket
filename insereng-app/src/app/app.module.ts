@@ -12,6 +12,9 @@ import { HttpClient } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SampleDataModule } from './sampledata/sampledata.module';
+import { CatalogueComponent } from './catalogue/catalogue.component';
+import { CatalogueMasterComponent } from './catalogue/catalogue-master/catalogue-master.component';
+import { CatalogueDetailComponent } from './catalogue/catalogue-detail/catalogue-detail.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -19,7 +22,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, CatalogueComponent, CatalogueMasterComponent, CatalogueDetailComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
