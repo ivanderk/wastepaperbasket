@@ -15,6 +15,11 @@
           <h3 matLine>{{ 'sampledatamanagement.SampleData.navData' | translate }}</h3>
           <p matLine>{{ 'sampledatamanagement.SampleData.navDataSub' | translate }}</p>
         </a>
+        <a id="Catalogue" mat-list-item [routerLink]="['./catalogue']" (click)="close()">
+          <mat-icon matListAvatar>grid_on</mat-icon>
+          <h3 matLine>{{ 'Catalogue' | translate }}</h3>
+          <p matLine>{{ 'Catalogue' | translate }}</p>
+        </a>
       </mat-nav-list>
     </div>
     <router-outlet></router-outlet>

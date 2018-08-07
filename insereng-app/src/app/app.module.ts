@@ -8,11 +8,22 @@ import { HomeModule } from './home/home.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { FlatTreeControl } from '@angular/cdk/tree';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SampleDataModule } from './sampledata/sampledata.module';
+<<<<<<< HEAD
 import { CmsModule } from './cms/cms.module';
+=======
+import { CatalogueComponent } from './catalogue/catalogue.component';
+import { CatalogueMasterComponent } from './catalogue/catalogue-master/catalogue-master.component';
+import { CatalogueDetailComponent } from './catalogue/catalogue-detail/catalogue-detail.component';
+
+import { HttpClientModule } from '@angular/common/http';
+>>>>>>> ee0e0ebea16f1cedbd51b27921f065b18bb32388
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -20,7 +31,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, CatalogueComponent, CatalogueMasterComponent, CatalogueDetailComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -28,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AppRoutingModule,
     CoreModule,
     HomeModule,
+    MatTreeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
