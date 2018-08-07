@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/security/auth-guard.service';
 import { LoginComponent } from './login/login.component';
+import { CatalogueComponent } from './catalogue/catalogue.component';
 import { HomeComponent } from './home/home.component';
 import { InitialPageComponent } from './home/initial-page/initial-page.component';
 import { SampleDataGridComponent } from './sampledata/sampledata-grid/sampledata-grid.component';
@@ -30,6 +31,11 @@ const routes: Routes = [
       {
         path: 'sampleData',
         component: SampleDataGridComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'catalogue',
+        component: CatalogueComponent,
         canActivate: [AuthGuard],
       },
     ],
