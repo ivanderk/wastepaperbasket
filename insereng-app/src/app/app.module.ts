@@ -8,6 +8,9 @@ import { HomeModule } from './home/home.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { FlatTreeControl } from '@angular/cdk/tree';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -15,6 +18,8 @@ import { SampleDataModule } from './sampledata/sampledata.module';
 import { CatalogueComponent } from './catalogue/catalogue.component';
 import { CatalogueMasterComponent } from './catalogue/catalogue-master/catalogue-master.component';
 import { CatalogueDetailComponent } from './catalogue/catalogue-detail/catalogue-detail.component';
+
+import { HttpClientModule } from '@angular/common/http';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -30,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AppRoutingModule,
     CoreModule,
     HomeModule,
+    MatTreeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
