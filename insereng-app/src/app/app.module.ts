@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SampleDataModule } from './sampledata/sampledata.module';
+import { CmsModule } from './cms/cms.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -35,6 +36,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       },
     }),
     SampleDataModule,
+    CmsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
