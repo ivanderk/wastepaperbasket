@@ -2,63 +2,43 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { BehaviorSubject, Observable, of as observableOf } from 'rxjs';
-
-/**
- * File node data with nested structure.
- * Each node has a filename, and a type or a list of children.
- */
-export class FileNode {
-  children: FileNode[];
-  filename: string;
-  type: any;
-}
+import { BehaviorSubject, merge, Observable, of as observableOf } from 'rxjs';
+import { CollectionViewer, SelectionChange } from '@angular/cdk/collections';
+import { map } from 'rxjs/operators';
 
 /** Flat node with expandable and level information */
-export class FileFlatNode {
-  constructor(
-    public expandable: boolean, public filename: string, public level: number, public type: any) {}
+export class DynamicFlatNode {
+  constructor(public item: string, public level = 1, public expandable = false,
+              public isLoading = false) {}
 }
 
 /**
- * The file structure tree data in string. The data could be parsed into a Json object
+ * Database for dynamic data. When expanding a node in the tree, the data source will need to fetch
+ * the descendants data from the database.
  */
-const TREE_DATA = JSON.stringify({
-  Applications: {
-    Calendar: 'app',
-    Chrome: 'app',
-    Webstorm: 'app',
-  },
-  Documents: {
-    angular: {
-      src: {
-        compiler: 'ts',
-        core: 'ts',
-      }
-    },
-    material2: {
-      src: {
-        button: 'ts',
-        checkbox: 'ts',
-        input: 'ts',
-      }
-    }
-  },
-  Downloads: {
-    October: 'pdf',
-    November: 'pdf',
-    Tutorial: 'html',
-  },
-  Pictures: {
-    'Photo Booth Library': {
-      Contents: 'dir',
-      Pictures: 'dir',
-    },
-    Sun: 'png',
-    Woods: 'jpg',
-  }
-});
+export class DynamicDatabase {
+  dataMap = new Map<string, string[]>([
+    ['Fruits', ['Apple', 'Orange', 'Banana']],
+    ['Vegetables', ['Tomato', 'Potato', 'Onion']],
+    ['Apple', ['Fuji', 'Macintosh']],
+    ['Onion', ['Yellow', 'White', 'Purple']]
+  ]);
 
+  rootLevelNodes: string[] = ['Fruits', 'Vegetables'];
+
+  /** Initial data from database */
+  initialData(): DynamicFlatNode[] {
+    return this.rootLevelNodes.map(name => new DynamicFlatNode(name, 0, true));
+  }
+
+  getChildren(node: string): string[] | undefined {
+    return this.dataMap.get(node);
+  }
+
+  isExpandable(node: string): boolean {
+    return this.dataMap.has(node);
+  }
+}
 /**
  * File database, it can build a tree structured Json object from string.
  * Each node in Json object represents a file or a directory. For a file, it has filename and type.
@@ -67,47 +47,68 @@ const TREE_DATA = JSON.stringify({
  * structure.
  */
 @Injectable()
-export class FileDatabase {
-  dataChange = new BehaviorSubject<FileNode[]>([]);
+export class DynamicDataSource {
 
-  get data(): FileNode[] { return this.dataChange.value; }
+  dataChange = new BehaviorSubject<DynamicFlatNode[]>([]);
 
-  constructor() {
-    this.initialize();
+  get data(): DynamicFlatNode[] { return this.dataChange.value; }
+  set data(value: DynamicFlatNode[]) {
+    this.treeControl.dataNodes = value;
+    this.dataChange.next(value);
   }
 
-  initialize() {
-    // Parse the string to json object.
-    const dataObject = JSON.parse(TREE_DATA);
+  constructor(private treeControl: FlatTreeControl<DynamicFlatNode>,
+              private database: DynamicDatabase) {}
 
-    // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
-    //     file node as children.
-    const data = this.buildFileTree(dataObject, 0);
+  connect(collectionViewer: CollectionViewer): Observable<DynamicFlatNode[]> {
+    this.treeControl.expansionModel.onChange!.subscribe(change => {
+      if ((change as SelectionChange<DynamicFlatNode>).added ||
+        (change as SelectionChange<DynamicFlatNode>).removed) {
+        this.handleTreeControl(change as SelectionChange<DynamicFlatNode>);
+      }
+    });
 
-    // Notify the change.
-    this.dataChange.next(data);
+    return merge(collectionViewer.viewChange, this.dataChange).pipe(map(() => this.data));
+  }
+
+  /** Handle expand/collapse behaviors */
+  handleTreeControl(change: SelectionChange<DynamicFlatNode>) {
+    if (change.added) {
+      change.added.forEach(node => this.toggleNode(node, true));
+    }
+    if (change.removed) {
+      change.removed.slice().reverse().forEach(node => this.toggleNode(node, false));
+    }
   }
 
   /**
-   * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
-   * The return value is the list of `FileNode`.
+   * Toggle the node, remove from display list
    */
-  buildFileTree(obj: object, level: number): FileNode[] {
-    return Object.keys(obj).reduce<FileNode[]>((accumulator, key) => {
-      const value = obj[key];
-      const node = new FileNode();
-      node.filename = key;
+  toggleNode(node: DynamicFlatNode, expand: boolean) {
+    const children = this.database.getChildren(node.item);
+    const index = this.data.indexOf(node);
+    if (!children || index < 0) { // If no children, or cannot find the node, no op
+      return;
+    }
 
-      if (value != null) {
-        if (typeof value === 'object') {
-          node.children = this.buildFileTree(value, level + 1);
-        } else {
-          node.type = value;
-        }
+    node.isLoading = true;
+
+    setTimeout(() => {
+      if (expand) {
+        const nodes = children.map(name =>
+          new DynamicFlatNode(name, node.level + 1, this.database.isExpandable(name)));
+        this.data.splice(index + 1, 0, ...nodes);
+      } else {
+        let count = 0;
+        for (let i = index + 1; i < this.data.length
+          && this.data[i].level > node.level; i++, count++) {}
+        this.data.splice(index + 1, count);
       }
 
-      return accumulator.concat(node);
-    }, []);
+      // notify the change
+      this.dataChange.next(this.data);
+      node.isLoading = false;
+    }, 1000);
   }
 }
 
@@ -115,31 +116,23 @@ export class FileDatabase {
   selector: 'app-catalogue-master',
   templateUrl: './catalogue-master.component.html',
   styleUrls: ['./catalogue-master.component.scss'],
-  providers: [FileDatabase],
+  providers: [DynamicDatabase],
 })
 export class CatalogueMasterComponent {
-  treeControl: FlatTreeControl<FileFlatNode>;
-  treeFlattener: MatTreeFlattener<FileNode, FileFlatNode>;
-  dataSource: MatTreeFlatDataSource<FileNode, FileFlatNode>;
+  constructor(database: DynamicDatabase) {
+    this.treeControl = new FlatTreeControl<DynamicFlatNode>(this.getLevel, this.isExpandable);
+    this.dataSource = new DynamicDataSource(this.treeControl, database);
 
-  constructor(database: FileDatabase) {
-    this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
-      this._isExpandable, this._getChildren);
-    this.treeControl = new FlatTreeControl<FileFlatNode>(this._getLevel, this._isExpandable);
-    this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-
-    database.dataChange.subscribe(data => this.dataSource.data = data);
+    this.dataSource.data = database.initialData();
   }
 
-  transformer = (node: FileNode, level: number) => {
-    return new FileFlatNode(!!node.children, node.filename, level, node.type);
-  }
+  treeControl: FlatTreeControl<DynamicFlatNode>;
 
-  private _getLevel = (node: FileFlatNode) => node.level;
+  dataSource: DynamicDataSource;
 
-  private _isExpandable = (node: FileFlatNode) => node.expandable;
+  getLevel = (node: DynamicFlatNode) => node.level;
 
-  private _getChildren = (node: FileNode): Observable<FileNode[]> => observableOf(node.children);
+  isExpandable = (node: DynamicFlatNode) => node.expandable;
 
-  hasChild = (_: number, _nodeData: FileFlatNode) => _nodeData.expandable;
+  hasChild = (_: number, _nodeData: DynamicFlatNode) => _nodeData.expandable;
 }
