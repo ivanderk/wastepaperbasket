@@ -36,3 +36,25 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Mongo installation & config
+
+For Mongo install and config options see: https://hub.docker.com/_/mongo/
+
+```bash
+# Mongo image install
+docker pull mongo
+
+# run mongo server process mapped to local dir
+# Note: on Windows or OSX it is NOT possible to map to a local dir (with MongDb; not in general)
+$ docker run --name mongo-db -v /my/own/datadir:/data/db -d mongo
+
+$ docker run --name mongo-db  -p 127.0.0.1:27017:27017  -d mongo
+
+
+# Without mapped directory
+
+
+# run mongo client connected to server process
+$ docker run -it --link mongo-db:mongo --rm mongo mongo --host mongo test
+
+```
