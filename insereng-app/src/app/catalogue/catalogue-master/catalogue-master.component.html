@@ -1,6 +1,6 @@
 
 <div class="masterComponentCss">
-  <td-search-input placeholder="Search here" [showUnderline]="true"></td-search-input>
+  <td-search-input placeholder="Search here" [showUnderline]="true" (search)="searchTree($event)"></td-search-input>
   <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
       <button mat-icon-button disabled></button>
