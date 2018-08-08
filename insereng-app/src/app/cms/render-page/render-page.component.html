@@ -1,3 +1,24 @@
-<p>
-  render-page works!
-</p>
+
+<div layout-gt-sm="row" tdMediaToggle="gt-xs" class="divdetail">
+    <div _ngcontent-c16="" class="pad-sm div-mat-card" flex="" layout="row">
+      <mat-card _ngcontent-c19="" class="mat-card mat-card-cat-detail" flex="">
+        <div>
+
+          <div class="mat-card-titles">
+            <h1>{{ page.title }}</h1>
+          </div>
+
+          <mat-divider></mat-divider>
+        </div>
+        <mat-card-content>
+            {{ page.content }}
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+          <a mat-button color="accent" class="text-upper">
+            <span>View More</span>
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { BusinessOperationsService } from '../../core/shared/business-operations.service';
+import { BusinessOperationsService } from '../shared/business-operations.service';
 
 @Injectable()
 export class LoginService {

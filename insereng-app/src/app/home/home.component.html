@@ -20,6 +20,11 @@
           <h3 matLine>{{ 'Catalogue' | translate }}</h3>
           <p matLine>{{ 'Catalogue' | translate }}</p>
         </a>
+        <a id="Cms" mat-list-item [routerLink]="['./cms']" (click)="close()">
+          <mat-icon matListAvatar>grid_on</mat-icon>
+          <h3 matLine>{{ 'Cms' | translate }}</h3>
+          <p matLine>{{ 'Cms' | translate }}</p>
+        </a>
       </mat-nav-list>
     </div>
     <router-outlet></router-outlet>

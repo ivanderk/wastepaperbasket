@@ -6,6 +6,7 @@ import { CatalogueComponent } from './catalogue/catalogue.component';
 import { HomeComponent } from './home/home.component';
 import { InitialPageComponent } from './home/initial-page/initial-page.component';
 import { SampleDataGridComponent } from './sampledata/sampledata-grid/sampledata-grid.component';
+import { CmsComponent } from './cms/cms.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,11 @@ const routes: Routes = [
       {
         path: 'catalogue',
         component: CatalogueComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'cms',
+        component: CmsComponent,
         canActivate: [AuthGuard],
       },
     ],

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Page } from '../page.model';
 
 @Component({
   selector: 'public-render-page',
@@ -6,5 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./render-page.component.scss'],
 })
 export class RenderPageComponent {
+
+  @Input() page: Page;
 
 }
