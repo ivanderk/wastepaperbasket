@@ -18,13 +18,20 @@ export class DynamicFlatNode {
  */
 export class DynamicDatabase {
   dataMap = new Map<string, string[]>([
-    ['Fruits', ['Apple', 'Orange', 'Banana']],
-    ['Vegetables', ['Tomato', 'Potato', 'Onion']],
-    ['Apple', ['Fuji', 'Macintosh']],
-    ['Onion', ['Yellow', 'White', 'Purple']]
+    ['Project Management', ['Jira', 'Confluence', 'SharePoint']],
+    ['Project Finance', ['Tomato', 'Potato', 'Onion']],
+    ['Ticketing', ['Fuji', 'Macintosh']],
+    ['Devops', ['Yellow', 'White', 'Purple']],
+    ['Requirement & Test', ['Yellow', 'White', 'Purple']],
+    ['Automation', ['Yellow', 'White', 'Purple']],
+    ['Quality', ['Yellow', 'White', 'Purple']],
+    ['Security', ['Yellow', 'White', 'Purple']],
+    ['Service Management', ['Yellow', 'White', 'Purple']],
+    ['Trainings', ['Yellow', 'White', 'Purple']],
+
   ]);
 
-  rootLevelNodes: string[] = ['Fruits', 'Vegetables'];
+  rootLevelNodes: string[] = ['Project Management', 'Project Finance', 'Ticketing', 'Devops', 'Requirement & Test', 'Automation', 'Quality', 'Security', 'Service Management','Trainings'];
 
   /** Initial data from database */
   initialData(): DynamicFlatNode[] {
