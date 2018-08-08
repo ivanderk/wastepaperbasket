@@ -44,4 +44,8 @@ export class LoginComponent {
         },
       );
   }
+
+  isLogged(): boolean {
+    return true;
+  }
 }

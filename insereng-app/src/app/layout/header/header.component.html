@@ -1,8 +1,10 @@
 <div layout="row" layout-align="start center" flex>
   <mat-icon class="mat-icon-logo cursor-pointer" svgIcon="logo" hide-xs></mat-icon>
-  <button mat-icon-button *ngIf="isLogged()" (click)="toggleSideNav()" hide-gt-sm>
+
+  <button mat-icon-button (click)="toggleSideNav()" hide-gt-sm>
     <mat-icon>menu</mat-icon>
   </button>
+
   <span class="cursor-pointer">{{'header.title' | translate}}</span>
 
   <span flex></span>
@@ -22,7 +24,7 @@
         <span> Castellano </span>
       </button>
     </mat-menu>
-  
+
     <button mat-icon-button *ngIf="isLogged()" (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
     </button>

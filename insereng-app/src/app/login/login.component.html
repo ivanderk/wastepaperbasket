@@ -1,5 +1,6 @@
 <td-layout-nav>
-  <public-header td-toolbar-content [sideNavOpened]="true" flex></public-header>
+  <public-header *ngIf="!isLogged()" td-toolbar-content [sideNavOpened]="true" flex></public-header>
+  <app-user-header *ngIf="isLogged()" td-toolbar-content [sideNavOpened]="true" flex></app-user-header>
   <div layout="row" layout-align="center" class="pad-top-xl">
     <mat-card style="width:350px;">
       <mat-card-title>{{'login.title' | translate}}</mat-card-title>
