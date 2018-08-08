@@ -1,7 +1,7 @@
 
 import { Entity, ObjectID, ObjectIdColumn, Column } from 'typeorm';
-import { ProductEntity } from 'catalog/entity/product.entity';
-import { ServiceRelatedEntity } from 'catalog/entity/service-related.entity';
+import { ProductEntity } from './product.entity';
+import { ServiceRelatedEntity } from './service-related.entity';
 
 @Entity('services')
 export class ServiceEntity {
