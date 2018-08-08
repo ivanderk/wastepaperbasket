@@ -1,0 +1,31 @@
+$max-height: 100%;
+.divdetail {
+  height: $max-height;
+}
+
+.mat-card-cat-detail {
+  padding: 0;
+  margin: 0;
+}
+
+.div-mat-card {
+  padding: 1px;
+  height: $max-height;
+}
+
+.button-request-now {
+  float: right;
+  position: relative;
+  top: 3em;
+  right: 2em;
+}
+
+.mat-card-titles {
+  width: auto;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.information-dropdown {
+    width:22em;
+}

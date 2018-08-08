@@ -1,3 +1,51 @@
-<p>
-  catalogue-detail works!
-</p>
+<div *ngIf="trainings" class="divdetail">
+  <div layout-gt-sm="row" tdMediaToggle="gt-xs" class="divdetail">
+    <div _ngcontent-c16="" class="pad-sm div-mat-card" flex="" layout="row">
+      <mat-card _ngcontent-c19="" class="mat-card mat-card-cat-detail" flex="">
+        <div>
+
+          <div class="mat-card-titles">
+            <h1>Jira - Confluence</h1>
+            <h2>usage stats for our products</h2>
+          </div>
+
+          <div class="button-request-now">
+            <button _ngcontent-c22="" color="primary" mat-flat-button="" class="mat-flat-button mat-primary">
+              <span class="text-upper">Request now</span>
+            </button>
+          </div>
+
+          <mat-divider></mat-divider>
+        </div>
+        <mat-card-content>
+
+          <!--<mat-form-field class="information-dropdown">
+            <mat-select placeholder="Information" [formControl]="formControl" required>
+              <mat-option>Informacion</mat-option>
+            </mat-select>
+            <mat-error *ngIf="formControl.hasError('required')">Please choose</mat-error>
+            <mat-hint>{{formControl.value?.information}}</mat-hint>
+          </mat-form-field>-->
+
+          <mat-form-field class="information-dropdown">
+            <mat-select placeholder="Training for xxx" [formControl]="formControl" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let training of trainings" [value]="training">
+                {{training.title}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formControl.hasError('required')">Please choose training</mat-error>
+            <mat-hint>{{formControl.value?.information}}</mat-hint>
+          </mat-form-field>
+
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+          <a mat-flat-button color="accent" class="text-upper">
+            <span>View More</span>
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
