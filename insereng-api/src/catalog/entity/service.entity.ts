@@ -1,14 +1,20 @@
 
 import { Entity, ObjectID, ObjectIdColumn, Column } from 'typeorm';
-
-import { Service } from '../api/service.api';
+import { ProductEntity } from './product.entity';
+import { ServiceRelatedEntity } from './service-related.entity';
 
 @Entity('services')
 export class ServiceEntity {
+
   @ObjectIdColumn() id: ObjectID;
 
   @Column() name: string;
 
-  /*@Column
-    products: Array<Product>;*/
+  @Column() category: string;
+
+  @Column(type => ProductEntity)
+  products: ProductEntity[];
+
+  @Column(type => ServiceRelatedEntity)
+  servicesRelated: ServiceRelatedEntity[];
 }

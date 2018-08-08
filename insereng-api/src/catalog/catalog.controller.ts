@@ -1,6 +1,5 @@
 import { Controller, Body, Post, Get } from '@nestjs/common';
 import { CatalogService } from './catalog.service';
-import { ServiceDto } from './dto/service.dto';
 import { ServiceEntity } from './entity/service.entity';
 
 @Controller('catalog')
@@ -14,7 +13,7 @@ export class CatalogController {
   }
 
   @Post()
-  async createService(@Body() serviceEntity: ServiceEntity): Promise<ServiceEntity> {
+  async createCatalog(@Body() serviceEntity: ServiceEntity): Promise<ServiceEntity> {
     return this.catalogService.saveServiceEntity(serviceEntity);
   }
 
