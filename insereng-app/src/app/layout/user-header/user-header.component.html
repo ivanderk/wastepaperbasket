@@ -1,19 +1,25 @@
-<div layout="row" layout-align="start center" flex>
-  <mat-icon class="mat-icon-logo cursor-pointer" svgIcon="logo" hide-xs></mat-icon>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div layout="row" layout-sm="row" layout-align="start center">
 
-  <p>user-header works</p>
+  <mat-icon class="mat-icon-logo cursor-pointer" hide-xs>Insereng</mat-icon>
 
-  <td-notification-count positionX="after" positionY="top" [notifications]="1">
+  <span flex></span>
+
+  <button mat-stroked-button class="btn-nav" (click)="loadMyServices()">My Services</button>
+  <button mat-stroked-button class="btn-nav" (click)="loadCatalogue()">Catalogue</button>
+
+  <td-notification-count positionX="after" positionY="top" [notifications]="true">
     <mat-icon>notifications</mat-icon>
   </td-notification-count>
+
+  <mat-icon>account_circle</mat-icon>
+
   <button mat-icon-button (click)="toggleSideNav()">
     <mat-icon>menu</mat-icon>
   </button>
 
-  <span class="pad-right-sm">
-    <button mat-icon-button *ngIf="isLogged()" (click)="logout()">
-      <mat-icon>exit_to_app</mat-icon>
-    </button>
-  </span>
+  <button mat-icon-button *ngIf="isLogged()" (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
 
 </div>

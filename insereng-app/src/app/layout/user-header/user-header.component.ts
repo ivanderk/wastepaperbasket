@@ -22,6 +22,10 @@ export class UserHeaderComponent implements OnInit {
 
   ngOnInit() {}
 
+  loadMyServices(): void {}
+
+  loadCatalogue(): void {}
+
   toggleSideNav(): void {
     this.sideNavOpened = !this.sideNavOpened;
     this.toggle.emit(this.sideNavOpened);

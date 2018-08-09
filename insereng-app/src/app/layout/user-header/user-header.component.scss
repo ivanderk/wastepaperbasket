@@ -8,12 +8,21 @@ nav a {
   color: white;
 }
 
-.navBottomBorder {
-  border-bottom: 3px solid white;
+.btn-nav {
+  width: 80%;
+  position: relative;
 }
 
-mat-sidenav {
-  width: 400px;
+.options-section {
+  width: 180px;
+  padding-right: 10px;
+  position: relative;
+}
+
+.notifications-section {
+  width: 80px;
+  padding-right: 10px;
+  position: relative;
 }
 
 @media (max-width: 600px) {
