@@ -20,6 +20,9 @@ import { CatalogueMasterComponent } from './catalogue/catalogue-master/catalogue
 import { CatalogueDetailComponent } from './catalogue/catalogue-detail/catalogue-detail.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './core/shared/in-memory-data.service';
+import { environment } from '../environments/environment';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -30,6 +33,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   declarations: [AppComponent, LoginComponent, CatalogueComponent, CatalogueMasterComponent, CatalogueDetailComponent],
   imports: [
     BrowserModule,
+    environment.production ? 
+    HttpClientModule : HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false, passThruUnknownUrl: true }),
     BrowserAnimationsModule,
     LayoutModule,
     AppRoutingModule,
@@ -45,7 +50,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
     SampleDataModule,
   ],
-  providers: [],
+  providers: [InMemoryDataService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

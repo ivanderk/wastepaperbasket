@@ -22,7 +22,7 @@ export class LoginService {
       },
       {
         withCredentials: true,
-        responseType: 'text',
+        responseType: 'json',
       },
     );
   }
