@@ -11,6 +11,8 @@ import { NewsDetailComponent } from './news/news-detail/news-detail.component';
 import { ArticleDetailComponent } from './articles/article-detail/article-detail.component';
 import { ArticleFormComponent } from './articles/article-form/article-form.component';
 import { ReactiveFormsModule }          from '@angular/forms';
+import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
+import { DynamicFormQuestionComponent } from './dynamic-form/dynamic-form-question.component';
 
 @NgModule({
   imports: [
@@ -20,6 +22,6 @@ import { ReactiveFormsModule }          from '@angular/forms';
     MatDividerModule,
     ReactiveFormsModule
   ],
-  declarations: [CmsComponent, RenderPageComponent, ArticlesComponent, NewsComponent, NewsDetailComponent, ArticleDetailComponent, ArticleFormComponent],
+  declarations: [CmsComponent, RenderPageComponent, ArticlesComponent, NewsComponent, NewsDetailComponent, ArticleDetailComponent, ArticleFormComponent,DynamicFormComponent,DynamicFormQuestionComponent],
 })
 export class CmsModule { }

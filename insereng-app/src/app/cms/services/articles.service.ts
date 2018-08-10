@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Article } from "../model/article.model";
+import { TextboxQuestion } from "../dynamic-form/question-textbox";
+import { QuestionBase } from "../dynamic-form/question-base";
 
 @Injectable({
     providedIn: 'root',
@@ -31,5 +33,28 @@ export class ArticleService{
     public getArticles():Article[]{
         return this.articles;
     }
+    //create the set of questions for dynamic forms
+    /*public getArticlesQuestions(){
+         let questions: QuestionBase<any>[];
+            let questionTitle= new TextboxQuestion({
+                key: 'title',
+                label: 'Title',
+                value: this.articles[0].title,
+                required: true,
+                order: 0
+              });
+              let questionImage= new TextboxQuestion({
+                key: 'imagePath',
+                label: 'Image Path',
+                value: this.articles[0].imagePath,
+                required: true,
+                order: 1
+              });
+              questions.push(questionTitle,questionImage);
+        
+        
+    }*/
+
+    
 
 }

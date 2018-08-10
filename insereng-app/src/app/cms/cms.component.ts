@@ -7,22 +7,27 @@ import { ArticleService } from './services/articles.service';
 import { NewsService } from './services/news.service';
 import { Article } from './model/article.model';
 import { News } from './model/news.model';
+import { QuestionService } from './dynamic-form/question.service';
+import { TextboxQuestion } from './dynamic-form/question-textbox';
 
 @Component({
   selector: 'public-cms',
   templateUrl: './cms.component.html',
   styleUrls: ['./cms.component.scss'],
+  providers:[QuestionService]
 })
 export class CmsComponent {
-
+  
   pages:Page[];
   selectedPage: Page;
   articles: Article[];
   selectedArticle: Article;
   news: News[];
   selectedNews: News;
+  //to create dynamic forms
+  questions: any[];
 
-  constructor(public pageService: PagesService,public articleService: ArticleService, public newsService: NewsService){
+  constructor(public pageService: PagesService,public articleService: ArticleService, public newsService: NewsService, public questionService: QuestionService){
     
   }
 
@@ -33,6 +38,7 @@ export class CmsComponent {
     this.selectPage(0);
     this.selectArticle(0);
     this.selectNews(1);
+    this.questions = this.questionService.getQuestions();
   }
 
 
@@ -45,5 +51,7 @@ export class CmsComponent {
   selectNews(index:number){
     this.selectedNews=this.news[index];
   }
+
+  
 
 }
