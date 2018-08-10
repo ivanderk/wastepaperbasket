@@ -137,6 +137,10 @@ export class CatalogueMasterComponent {
 
   dataSource: DynamicDataSource;
 
+  searchTree(searchInputTerm: string): void {
+   //TODO
+  }
+
   getLevel = (node: DynamicFlatNode) => node.level;
 
   isExpandable = (node: DynamicFlatNode) => node.expandable;
