@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Page } from '../page.model';
+import { Page } from '../model/page.model';
 
 @Component({
   selector: 'public-render-page',
