@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatDividerModule } from '@angular/material/divider';
 import { UserHeaderComponent } from './user-header.component';
 
 describe('UserHeaderComponent', () => {
@@ -8,9 +8,8 @@ describe('UserHeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserHeaderComponent ]
-    })
-    .compileComponents();
+      declarations: [UserHeaderComponent, MatDividerModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

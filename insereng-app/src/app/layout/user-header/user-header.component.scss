@@ -1,22 +1,20 @@
-nav {
-  border-bottom: none;
-  margin-right: 20px;
-}
-
-nav a {
-  min-width: 100px !important;
-  color: white;
-}
-
-.btn-nav {
-  width: 80%;
+.container-catalogue {
   position: relative;
+  margin-left: 1%;
 }
 
-.options-section {
-  width: 180px;
-  padding-right: 10px;
+.btn-catalogue {
+  margin-left: 30%;
+}
+
+.container-services {
   position: relative;
+  margin-left: 70%;
+}
+
+.btn-services {
+  margin-right: 30%;
+  float: right;
 }
 
 .notifications-section {

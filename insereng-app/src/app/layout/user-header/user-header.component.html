@@ -1,12 +1,18 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div layout="row" layout-sm="row" layout-align="start center">
 
-  <mat-icon class="mat-icon-logo cursor-pointer" hide-xs>Insereng</mat-icon>
+  <!-- <mat-icon hide-xs> -->
+  <img with="50%" height="10%" src="/assets/inserelogo.png" alt="insere">
+  <!-- </mat-icon> -->
 
-  <span flex></span>
+  <div class="container-catalogue">
+    <button mat-button class="btn-catalogue" (click)="loadCatalogue()">Catalogue</button>
+  </div>
+  <div class="container-services">
+    <button mat-button class="btn-services" (click)="loadMyServices()">My Services</button>
+  </div>
 
-  <button mat-stroked-button class="btn-nav" (click)="loadMyServices()">My Services</button>
-  <button mat-stroked-button class="btn-nav" (click)="loadCatalogue()">Catalogue</button>
+  <mat-divider [vertical]="true"></mat-divider>
 
   <td-notification-count positionX="after" positionY="top" [notifications]="true">
     <mat-icon>notifications</mat-icon>
